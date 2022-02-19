@@ -21,6 +21,7 @@ jobs:
         run: cd backend && npm test
         env:
           TEST_MONGODB_URL: ${{ secrets.TEST_MONGODB_URL }}
+          LOGIN_TOKEN_HMAC_KEY: ${{ secrets.LOGIN_TOKEN_HMAC_KEY }}
       - name: install frontend dependencies
         run: cd frontend && npm install
       - name: lint frontend
@@ -37,3 +38,4 @@ jobs:
           wait-on: http://localhost:3003
         env:
           TEST_MONGODB_URL: ${{ secrets.TEST_MONGODB_URL }}
+          LOGIN_TOKEN_HMAC_KEY: ${{ secrets.LOGIN_TOKEN_HMAC_KEY }}
