@@ -1,0 +1,35 @@
+name: Testing and deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - name: install backend dependencies
+        run: cd backend && npm install
+      - name: lint backend
+        run: cd backend && npm run lint
+      - name: unit test backend
+        run: cd backend && npm test
+      - name: install frontend dependencies
+        run: cd frontend && npm install
+      - name: lint frontend
+        run: cd frontend && npm run lint
+      - name: unit test frontend
+        run: cd frontend && npm test
+      - name: build a production version of frontend
+        run: cd frontend && npm run build
+      - name: run end-to-end tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: cd frontend && npm run cypress:run
+          start: cd backend && npm run start:test
+          wait-on: http://localhost:3003
