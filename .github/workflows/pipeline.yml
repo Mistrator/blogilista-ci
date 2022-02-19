@@ -19,6 +19,8 @@ jobs:
         run: cd backend && npm run lint
       - name: unit test backend
         run: cd backend && npm test
+        env:
+          TEST_MONGODB_URL: ${{ secrets.TEST_MONGODB_URL }}
       - name: install frontend dependencies
         run: cd frontend && npm install
       - name: lint frontend
@@ -33,3 +35,5 @@ jobs:
           command: cd frontend && npm run cypress:run
           start: cd backend && npm run start:test
           wait-on: http://localhost:3003
+        env:
+          TEST_MONGODB_URL: ${{ secrets.TEST_MONGODB_URL }}
