@@ -79,26 +79,5 @@ describe('Blog app', function() {
       cy.contains('Remove').click()
       cy.contains('Blog removed')
     })
-
-    it('Blogs are sorted by likes', function() {
-      cy.createBlog(testBlog)
-      cy.createBlog(otherBlog)
-
-      cy.get('.blog').then((blogs) => {
-        cy.wrap(blogs[0]).contains('Show').click()
-        cy.wrap(blogs[1]).contains('Show').click()
-      })
-
-      cy.get('.blog').then((blogs) => {
-        cy.wrap(blogs[0]).contains(testBlog.title)
-        cy.wrap(blogs[1]).contains(otherBlog.title)
-        cy.wrap(blogs[1]).contains('Like').click()
-      })
-
-      cy.get('.blog').then((blogs) => {
-        cy.wrap(blogs[0]).get('.likes').contains('1')
-        cy.wrap(blogs[0]).contains(otherBlog.title)
-      })
-    })
   })
 })
