@@ -11,6 +11,9 @@ const mongoose = require('mongoose')
 
 const app = express()
 
+// Serve frontend production build
+app.use(express.static('build'))
+
 app.use(cors())
 app.use(express.json())
 app.use(middleware.tokenExtractor)
