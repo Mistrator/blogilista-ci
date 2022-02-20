@@ -12,12 +12,6 @@ describe('Blog app', function() {
     url: 'http://localhost'
   }
 
-  const otherBlog = {
-    title: 'Other Blog',
-    author: 'Other Author',
-    url: 'http://example.com'
-  }
-
   beforeEach(function() {
     cy.request('POST', 'http://localhost:3003/api/testing/reset')
     cy.request('POST', 'http://localhost:3003/api/users', testUser)
