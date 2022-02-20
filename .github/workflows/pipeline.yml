@@ -40,3 +40,17 @@ jobs:
         env:
           TEST_MONGODB_URL: ${{ secrets.TEST_MONGODB_URL }}
           LOGIN_TOKEN_HMAC_KEY: ${{ secrets.LOGIN_TOKEN_HMAC_KEY }}
+      - name: bump version and push tag
+        if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
+        uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+      - name: deploy to heroku
+        if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: frozen-ridge-63934
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          appdir: backend
