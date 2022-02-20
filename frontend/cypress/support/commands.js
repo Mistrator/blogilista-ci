@@ -29,7 +29,7 @@ Cypress.Commands.add('login', (username, password) => {
     username, password
   }).then(({ body }) => {
     localStorage.setItem('loggedInUser', JSON.stringify(body))
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:3003')
   })
 })
 
@@ -45,5 +45,5 @@ Cypress.Commands.add('createBlog', (blog) => {
 
   // We need to reload to refresh the blog list, because we bypass
   // the normal blog creation.
-  cy.visit('http://localhost:3000')
+  cy.visit('http://localhost:3003')
 })
