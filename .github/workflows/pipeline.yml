@@ -34,9 +34,8 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           start: npm --prefix backend run start:test
-          working-directory: frontend
           install: false
-          command: npm run cypress:run
+          command: npm --prefix frontend run cypress:run
           wait-on: http://localhost:3003
         env:
           TEST_MONGODB_URL: ${{ secrets.TEST_MONGODB_URL }}
