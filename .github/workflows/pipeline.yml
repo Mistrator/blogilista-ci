@@ -33,8 +33,10 @@ jobs:
       - name: run end-to-end tests
         uses: cypress-io/github-action@v2
         with:
-          command: cd frontend && npm run cypress:run
-          start: cd backend && npm run start:test
+          start: npm --prefix backend run start:test
+          working-directory: frontend
+          install: false
+          command: npm run cypress:run
           wait-on: http://localhost:3003
         env:
           TEST_MONGODB_URL: ${{ secrets.TEST_MONGODB_URL }}
