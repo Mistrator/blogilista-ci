@@ -40,14 +40,14 @@ jobs:
         env:
           TEST_MONGODB_URL: ${{ secrets.TEST_MONGODB_URL }}
           LOGIN_TOKEN_HMAC_KEY: ${{ secrets.LOGIN_TOKEN_HMAC_KEY }}
-      - name: bump version and push tag
-        if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
-        uses: anothrNick/github-tag-action@1.33.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: patch
+      #- name: bump version and push tag
+      #  if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
+      #  uses: anothrNick/github-tag-action@1.33.0
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #    DEFAULT_BUMP: patch
       - name: show current git state
-        run: git status && git status --porcelain && cd .git && ls -lhR
+        run: git status && git status --porcelain && cd .git && ls -alhR
       - name: deploy to heroku
         if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
         uses: akhileshns/heroku-deploy@v3.12.12
