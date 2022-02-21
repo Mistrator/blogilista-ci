@@ -46,8 +46,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           release_branches: master
-      - name: show current git state
-        run: git status && git status --porcelain && ls -alhR frontend/cypress/plugins && ls -alhR .git
       - name: deploy to heroku
         if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
         uses: akhileshns/heroku-deploy@v3.12.12
