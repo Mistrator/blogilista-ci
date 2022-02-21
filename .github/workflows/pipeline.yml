@@ -46,6 +46,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
+      - name: show current git state
+        run: git status && git status --porcelain && cd .git && ls -lhR
       - name: deploy to heroku
         if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
         uses: akhileshns/heroku-deploy@v3.12.12
