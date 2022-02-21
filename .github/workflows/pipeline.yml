@@ -54,3 +54,5 @@ jobs:
           heroku_app_name: obscure-caverns-12256
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           appdir: backend
+          healthcheck: https://obscure-caverns-12256.herokuapp.com/health
+          rollbackonhealthcheckfailed: true

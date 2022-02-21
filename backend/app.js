@@ -27,6 +27,10 @@ if (process.env.NODE_ENV === 'test') {
 
 mongoose.connect(config.MONGODB_URL)
 
+app.get('/health', (req, res) => {
+  res.send('ok')
+})
+
 const errorHandler = (error, req, res, next) => {
   console.error(error.message)
 
