@@ -50,7 +50,7 @@ const App = () => {
   const showInfoMessage = (message) => {
     setInfoMessage(message)
 
-    const duration = 5000
+    const duration = 2500
     setTimeout(() => {
       setInfoMessage(null)
     }, duration)
@@ -59,7 +59,7 @@ const App = () => {
   const showErrorMessage = (message) => {
     setErrorMessage(message)
 
-    const duration = 5000
+    const duration = 2500
     setTimeout(() => {
       setErrorMessage(null)
     }, duration)
